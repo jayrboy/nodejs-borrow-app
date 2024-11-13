@@ -40,3 +40,14 @@ export const getTransactionSummary = async (req, res) => {
     res.status(500).send('Error fetching transaction summary');
   }
 };
+
+export const getTransactions = async (req, res) => {
+  try {
+    Transaction.find({})
+      .exec()
+      .then((docs) => res.status(200).json(docs));
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error fetching transaction summary');
+  }
+};
