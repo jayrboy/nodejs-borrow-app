@@ -26,10 +26,16 @@ export let User = mongoose.model('User', userSchema);
 const transactionSchema = mongoose.Schema(
   {
     user_id: String,
-    status: { type: Schema.Types.ObjectId, ref: 'TransactionType' },
+    status: String,
     money: Number,
-    borrow_by: String,
-    refund_by: String,
+    borrow_by: {
+      type: String,
+      default: '',
+    },
+    refund_by: {
+      type: String,
+      default: '',
+    },
     update_by: String,
   },
   { timestamps: true }
