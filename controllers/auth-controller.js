@@ -3,6 +3,54 @@ import jwt from 'jsonwebtoken';
 
 import { User } from '../models.js';
 
+/**
+ * @swagger
+ * /api/register:
+ *   post:
+ *     tags: [Authorization]
+ *     summary: "Register a new user"
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 example: "admin"
+ *               password:
+ *                 type: string
+ *                 example: "1234"
+ *               name:
+ *                 type: string
+ *                 example: "A"
+ *     responses:
+ *       200:
+ *         description: "Register Successfully"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *             example: "Register Successfully"
+ *       400:
+ *         description: "User Already Exists!"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *             example: "User Already Exists!"
+ *       500:
+ *         description: "Internal Server Error"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "An unexpected error occurred."
+ */
 export const register = async (req, res) => {
   try {
     let { username, password, name } = req.body;

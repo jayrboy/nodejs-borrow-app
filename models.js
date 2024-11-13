@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
-const { Schema } = mongoose;
 
 // Database Connection
 mongoose
-  .connect('mongodb://localhost/db1')
+  .connect(process.env.MONGODB_URL)
   .then(() => console.log('MongoDB Connected!'))
   .catch((err) => console.log(err));
 
