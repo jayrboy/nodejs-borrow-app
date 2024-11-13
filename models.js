@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
-import { type } from 'os';
+const { Schema } = mongoose;
 
-//* Connection
+// Database Connection
 mongoose
   .connect('mongodb://localhost/db1')
   .then(() => console.log('MongoDB Connected!'))
   .catch((err) => console.log(err));
 
-//* User Model
+// User Model
 const userSchema = mongoose.Schema(
   {
     username: String,
@@ -22,11 +22,11 @@ const userSchema = mongoose.Schema(
 );
 export let User = mongoose.model('User', userSchema);
 
-//* Transaction Model
+// Transaction Model
 const transactionSchema = mongoose.Schema(
   {
     user_id: String,
-    status: String,
+    status: { type: Schema.Types.ObjectId, ref: 'TransactionType' },
     money: Number,
     borrow_by: String,
     refund_by: String,
@@ -35,3 +35,16 @@ const transactionSchema = mongoose.Schema(
   { timestamps: true }
 );
 export let Transaction = mongoose.model('Transaction', transactionSchema);
+
+// TransactionType Model
+const transactionTypeSchema = mongoose.Schema(
+  {
+    type_id: Number,
+    type_name: String,
+  },
+  { timestamps: true }
+);
+export let TransactionType = mongoose.model(
+  'TransactionType',
+  transactionTypeSchema
+);
